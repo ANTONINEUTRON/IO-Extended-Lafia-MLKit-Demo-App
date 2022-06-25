@@ -23,6 +23,7 @@
         android:layout_height="wrap_content"
         android:text="Leave App"
         android:layout_marginStart="20dp"
+        android:backgroundTint="#ff0000"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
 

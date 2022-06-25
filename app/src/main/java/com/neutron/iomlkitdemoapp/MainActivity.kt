@@ -27,14 +27,15 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        //check for camera permission
         if(!allPermissionsGranted()){
             requestPermission()
         }
 
         startCamera()
 
+        //set listener to capture button
         val captureButton: FloatingActionButton = findViewById(R.id.image_capture_button)
-
         captureButton.setOnClickListener {
             takePhoto()
         }
@@ -83,17 +84,18 @@ class MainActivity : AppCompatActivity() {
     private fun takePhoto() {
         // Get a stable reference of the modifiable image capture use case
         val imageCapture: ImageCapture = imageCapture ?: return
+
+        //Take picture
         imageCapture.takePicture(
             ContextCompat.getMainExecutor(this),
             object : ImageCapture.OnImageCapturedCallback() {
                 override fun onCaptureSuccess(image: ImageProxy) {
                     recognizeText(image)
-                    Toast.makeText(this@MainActivity,"Captured successfully .....", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@MainActivity,"Captured successfully .....\nIdentifying Text", Toast.LENGTH_LONG).show()
                     super.onCaptureSuccess(image)
                 }
 
                 override fun onError(exception: ImageCaptureException) {
-
                     super.onError(exception)
                 }
             }
